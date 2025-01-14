@@ -1,1 +1,3 @@
 a.out
+*.o
+base64test
