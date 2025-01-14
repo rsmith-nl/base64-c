@@ -4,13 +4,13 @@
 // Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: MIT
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-01-14T20:37:56+0100
+// Last modified: 2025-01-14T20:41:11+0100
 
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>  // memcpy
 
-const char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const char B64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                    "abcdefghijklmnopqrstuvwxyz"
                    "0123456789+/";
 
@@ -28,10 +28,10 @@ int b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
     for (int32_t j = 0, olen = 0; j < xlen; j+=3, olen+=4) {
       unsigned char obuf[4] = {0};
       uint32_t t = (buf[j]<<16)|(buf[j+1]<<8)|(buf[j+2]);
-      obuf[0] = b64[(t&0xfc0000)>>18];
-      obuf[1] = b64[(t&0x3f000)>>12];
-      obuf[2] = b64[(t&0xfc0)>>6];
-      obuf[3] = b64[t&0x3f];
+      obuf[0] = B64[(t&0xfc0000)>>18];
+      obuf[1] = B64[(t&0x3f000)>>12];
+      obuf[2] = B64[(t&0xfc0)>>6];
+      obuf[3] = B64[t&0x3f];
       if (olen <= outlen - 4) {
         memcpy(out, obuf, 4);
         out += 4;
