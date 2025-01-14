@@ -4,7 +4,7 @@
 // Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: MIT
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-01-14T21:48:32+0100
+// Last modified: 2025-01-14T21:50:12+0100
 
 #include <stdio.h>
 #include <stdint.h>
@@ -35,10 +35,6 @@ int b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
         memcpy(out, obuf, 4);
         out += 4;
       }
-      //else {
-      //  uint32_t rem = olen - outlen;
-      //  memcpy(out, obuf, rem);
-      //}
     }
     return 0;
 }
