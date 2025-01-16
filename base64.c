@@ -4,15 +4,14 @@
 // Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: MIT
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-01-16T23:53:57+0100
+// Last modified: 2025-01-17T00:03:09+0100
 
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>  // memcpy
 
-const char B64[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                     "abcdefghijklmnopqrstuvwxyz"
-                     "0123456789+/";
+const char B64[64] =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 void b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
 {
@@ -55,13 +54,14 @@ void b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
 // In Python:
 // invB64 = [B64.index(chr(j)) if chr(j) in B64 else -1 for j in range(128)]
 const char invB64[128] = {
- -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
- -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
- -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60,
- 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
- 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26,
- 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45,
- 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
+  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+  52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
+  -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+  18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27,
+  28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+  44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
 };
 
 int b64decode(char *in, uint32_t inlen, unsigned char *out, uint32_t outlen)
