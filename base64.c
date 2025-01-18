@@ -4,16 +4,16 @@
 // Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: MIT
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-01-17T00:03:09+0100
+// Last modified: 2025-01-18T21:13:46+0100
 
+#include "base64.h"
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>  // memcpy
 
 const char B64[64] =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-void b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
+void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
 {
   uint32_t xlen = 3 - (inlen % 3), after;
   if (xlen == 3) {
@@ -26,7 +26,7 @@ void b64encode(char *in, uint32_t inlen, char *out, uint32_t outlen)
   memset(out, 0, outlen);
   memcpy(buf, in, inlen);
   char *ix = out;
-  for (int32_t j = 0, olen = 0; j < xlen; j+=3, olen+=4) {
+  for (uint32_t j = 0, olen = 0; j < xlen; j+=3, olen+=4) {
     unsigned char obuf[4] = {0};
     uint32_t t = (buf[j]<<16)|(buf[j+1]<<8)|(buf[j+2]);
     obuf[0] = B64[(t&0xfc0000)>>18];
@@ -64,13 +64,13 @@ const char invB64[128] = {
   44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
 };
 
-int b64decode(char *in, uint32_t inlen, unsigned char *out, uint32_t outlen)
+int b64decode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
 {
   int ix = 0;
   uint32_t outcnt = 0;
   unsigned char obuf[5] = {0};
-  unsigned char *p = out;
-  for (int32_t j = 0; j < inlen; j++) {
+  char *p = out;
+  for (uint32_t j = 0; j < inlen; j++) {
     int cur = in[j];
     if (cur == 61) {
       // Filler
@@ -91,47 +91,6 @@ int b64decode(char *in, uint32_t inlen, unsigned char *out, uint32_t outlen)
           return 0;
         }
       }
-    }
-  }
-  return 0;
-}
-
-
-
-// Test for b64encode.
-int main(int argc, char *argv[])
-{
-  char *in[5] =  {
-    "This is a test",
-    "foo",
-    "Hello",
-    "Testing, testing 1, 2, 3.",
-    "Abacadabra"
-  };
-  char *expected[5] = {
-    "VGhpcyBpcyBhIHRlc3Q=",
-    "Zm9v",
-    "SGVsbG8=",
-    "VGVzdGluZywgdGVzdGluZyAxLCAyLCAzLg==",
-    "QWJhY2FkYWJyYQ=="
-  };
-  for (int32_t j = 0; j < 5; j++) {
-    char out[64] = {0};
-    b64encode(in[j], strlen(in[j]), out, 63);
-    if (strcmp(out, expected[j]) == 0) {
-      printf("PASSED: b64encode(\"%s\") == \"%s\"\n", in[j], expected[j]);
-    } else {
-      printf("FAILED: b64encode(\"%s\") != \"%s\"\n", in[j], expected[j]);
-    }
-  }
-  puts("-----");
-  for (int32_t j = 0; j < 5; j++) {
-    char out[64] = {0};
-    b64decode(expected[j], strlen(expected[j]), (unsigned char *)out, 63);
-    if (strcmp(out, in[j]) == 0) {
-      printf("PASSED: b64decode(\"%s\") == \"%s\"\n", out, in[j]);
-    } else {
-      printf("FAILED: b64decode(\"%s\") != \"%s\"\n", out, in[j]);
     }
   }
   return 0;
