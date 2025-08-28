@@ -1,10 +1,11 @@
 // file: base64.h
 // vim:fileencoding=utf-8:ft=c:tabstop=2
+// This is free and unencumbered software released into the public domain.
 //
-// Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
-// SPDX-License-Identifier: MIT
+// Author: R.F. Smith <rsmith@xs4all.nl>
+// SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:22:18 +0100
-// Last modified: 2025-01-18T21:12:43+0100
+// Last modified: 2025-08-29T00:26:50+0200
 
 #pragma once
 

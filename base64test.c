@@ -1,10 +1,11 @@
 // file: base64test.c
 // vim:fileencoding=utf-8:ft=c:tabstop=2
+// This is free and unencumbered software released into the public domain.
 //
-// Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
-// SPDX-License-Identifier: MIT
+// Author: R.F. Smith <rsmith@xs4all.nl>
+// SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:25:21 +0100
-// Last modified: 2025-01-19T18:38:08+0100
+// Last modified: 2025-08-29T00:27:31+0200
 
 #include "base64.h"
 #include <stdio.h>

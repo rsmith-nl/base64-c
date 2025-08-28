@@ -1,13 +1,13 @@
 // file: base64.c
 // vim:fileencoding=utf-8:ft=c:tabstop=2
+// This is free and unencumbered software released into the public domain.
 //
-// Copyright © 2025 R.F. Smith <rsmith@xs4all.nl>
-// SPDX-License-Identifier: MIT
+// Author: R.F. Smith <rsmith@xs4all.nl>
+// SPDX-License-Identifier: Unlicense
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-01-18T21:13:46+0100
+// Last modified: 2025-08-29T00:33:08+0200
 
 #include "base64.h"
-#include <stdio.h>
 #include <string.h>  // memcpy
 
 const char B64[64] =
@@ -71,7 +71,7 @@ int b64decode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
   unsigned char obuf[5] = {0};
   char *p = out;
   for (uint32_t j = 0; j < inlen; j++) {
-    int cur = in[j];
+    int cur = (unsigned char)in[j];
     if (cur == 61) {
       // Filler
       obuf[ix++] = 0;
