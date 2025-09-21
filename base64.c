@@ -5,12 +5,12 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-08-29T00:33:08+0200
+// Last modified: 2025-09-21T11:06:23+0200
 
 #include "base64.h"
 #include <string.h>  // memcpy
 
-const char B64[64] =
+static const char B64[64] =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
@@ -53,7 +53,7 @@ void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
 
 // In Python:
 // invB64 = [B64.index(chr(j)) if chr(j) in B64 else -1 for j in range(128)]
-const char invB64[128] = {
+static const char invB64[128] = {
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
