@@ -3,18 +3,18 @@
 #
 # Author: R.F. Smith <rsmith@xs4all.nl>
 # Created: 2025-01-14T21:43:09+0100
-# Last modified: 2025-08-29T00:31:33+0200
+# Last modified: 2026-02-21T23:53:49+0100
 
-all: base64test
+all: b64test
 
 CFLAGS = -pipe -std=c11 -fPIC -g3 -Wall -Wextra -Wstrict-prototypes -Wpedantic \
                 -Wshadow-all -Wmissing-field-initializers -Wpointer-arith \
                 -fsanitize=address,undefined
 
-SRCS = base64test.c base64.c
+SRCS = b64test.c base64.c
 
-base64test: $(SRCS)
-	$(CC) $(CFLAGS) -o base64test  $(SRCS) -fsanitize=address,undefined
+b64test: $(SRCS)  ## Compile test program (default)
+	$(CC) $(CFLAGS) -o b64test  $(SRCS) -fsanitize=address,undefined
 
 .PHONY: style
 style:  ## Reformat source code using astyle.
@@ -24,8 +24,12 @@ style:  ## Reformat source code using astyle.
 tidy:  ## Run static code checker clang-tidy.
 	 clang-tidy19 --use-color --quiet *.c *.h --
 
-tags: $(SRCS) *.h  ## Update tags file
-
 .PHONY: clean
-clean:
-	rm -f *.o base64test
+clean:  ## Remove generated files
+	rm -f *.o b64test
+
+.PHONY: help
+help:  ## List available commands
+	@echo "make targets:"
+	@sed -n -e '/##/s/:.*\#\#/\t/p' Makefile
+	@echo
