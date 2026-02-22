@@ -5,12 +5,12 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2026-02-22T01:47:37+0100
+// Last modified: 2026-02-22T01:52:14+0100
 
 #include "base64.h"
 #include <string.h>  // for memset, memcpy, strnlen
 
-static const char B64[64] =
+static const char B64[65] =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
