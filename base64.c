@@ -5,10 +5,10 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2025-09-21T11:06:23+0200
+// Last modified: 2026-02-22T01:35:13+0100
 
 #include "base64.h"
-#include <string.h>  // memcpy
+#include <string.h>  // for memset, memcpy
 
 static const char B64[64] =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
