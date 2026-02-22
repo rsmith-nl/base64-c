@@ -3,7 +3,7 @@
 #
 # Author: R.F. Smith <rsmith@xs4all.nl>
 # Created: 2025-01-14T21:43:09+0100
-# Last modified: 2026-02-22T01:38:27+0100
+# Last modified: 2026-02-22T01:54:54+0100
 
 all: b64test
 
@@ -25,7 +25,7 @@ tidy:  ## Run static code checker clang-tidy.
 
 .PHONY: clean
 clean:  ## Remove generated files
-	rm -f *.o b64test
+	rm -f *.o b64test b64test.exe
 
 .PHONY: help
 help:  ## List available commands
