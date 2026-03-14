@@ -5,7 +5,7 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-13 21:22:40 +0100
-// Last modified: 2026-02-22T01:52:14+0100
+// Last modified: 2026-03-14T17:04:14+0100
 
 #include "base64.h"
 #include <string.h>  // for memset, memcpy, strnlen
@@ -76,7 +76,7 @@ int b64decode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
       // Filler
       obuf[ix++] = 0;
     } else if (cur < 0 || invB64[cur] == -1) {
-      return -1; // Input contains illegal character
+      continue; // Ignore illegal characters.
     } else {
       obuf[ix++] = invB64[cur];
     }

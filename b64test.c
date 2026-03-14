@@ -5,7 +5,7 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:25:21 +0100
-// Last modified: 2025-08-29T00:27:31+0200
+// Last modified: 2026-03-14T17:06:18+0100
 
 #include "base64.h"
 #include <stdio.h>
@@ -24,19 +24,21 @@
 // Test for b64encode and b64decode.
 int main(void)
 {
-  const char *in[5] =  {
+  const char *in[6] =  {
     "This is a test",
     "foo",
     "Hello",
     "Testing, testing 1, 2, 3.",
+    "Abacadabra",
     "Abacadabra"
   };
-  const char *expected[5] = {
+  const char *expected[6] = {
     "VGhpcyBpcyBhIHRlc3Q=",
     "Zm9v",
     "SGVsbG8=",
     "VGVzdGluZywgdGVzdGluZyAxLCAyLCAzLg==",
-    "QWJhY2FkYWJyYQ=="
+    "QWJhY2FkYWJyYQ==",
+    "QWJhY 2FkYWJyYQ=="
   };
   for (int32_t j = 0; j < 5; j++) {
     char out[64] = {0};
@@ -48,7 +50,7 @@ int main(void)
     }
   }
   puts("-----");
-  for (int32_t j = 0; j < 5; j++) {
+  for (int32_t j = 0; j < 6; j++) {
     char out[64] = {0};
     b64decode(expected[j], strlen(expected[j]), out, 63);
     if (strcmp(out, in[j]) == 0) {
