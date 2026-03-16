@@ -5,7 +5,7 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:25:21 +0100
-// Last modified: 2026-03-16T00:20:14+0100
+// Last modified: 2026-03-16T23:28:19+0100
 
 #include "base64.h"
 #include <stdio.h>
@@ -24,25 +24,28 @@
 // Test for b64encode and b64decode.
 int main(void)
 {
-  const char *in[6] =  {
+  const char *in[7] =  {
     "This is a test",
     "foo",
     "Hello",
     "Testing, testing 1, 2, 3.",
     "Abacadabra",
-    "Abacadabra"
+    "ünicóde",
+    "Abacadabra",
   };
-  const char *expected[6] = {
+  const char *expected[7] = {
     "VGhpcyBpcyBhIHRlc3Q=",
     "Zm9v",
     "SGVsbG8=",
     "VGVzdGluZywgdGVzdGluZyAxLCAyLCAzLg==",
     "QWJhY2FkYWJyYQ==",
-    "QWJhY 2FkYWJyYQ=="
+    "w7xuaWPDs2Rl",
+    "QWJhY 2FkYWJyYQ==",
   };
   int failcount = 0;
-  puts(PURPLE"Running tests for b64encode"RESET);
-  for (int32_t j = 0; j < 5; j++) {
+  puts(PURPLE"Start tests"RESET);
+  puts(CYAN"Running tests for b64encode"RESET);
+  for (int32_t j = 0; j < 6; j++) {
     char out[64] = {0};
     b64encode(in[j], strlen(in[j]), out, 63);
     if (strcmp(out, expected[j]) == 0) {
@@ -52,8 +55,8 @@ int main(void)
       failcount++;
     }
   }
-  puts(PURPLE"Running tests for b64decode"RESET);
-  for (int32_t j = 0; j < 6; j++) {
+  puts(CYAN"Running tests for b64decode"RESET);
+  for (int32_t j = 0; j < 7; j++) {
     char out[64] = {0};
     b64decode(expected[j], strlen(expected[j]), out, 63);
     if (strcmp(out, in[j]) == 0) {
