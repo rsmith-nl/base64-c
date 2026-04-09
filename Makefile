@@ -1,4 +1,5 @@
 # vim:fileencoding=utf-8:ft=make
+# Use as many jobs as the computer has cores.
 .MAKEFLAGS: -j C
 
 CFLAGS = -pipe -std=c11 -g3 -Wall -Wextra -Wstrict-prototypes -Wpedantic \
@@ -17,7 +18,7 @@ single_header/base64.h: base64.c base64.h  ## Build single header library (POSIX
 
 .PHONY: style
 style:  ## Reformat source code using astyle.
-	astyle -n *.c *.h
+	astyle -n --style=1tbs -s2 -p --indent-switches --delete-empty-lines --add-braces *.c *.h
 
 .PHONY: tidy
 tidy:  ## Run static code checker clang-tidy.
