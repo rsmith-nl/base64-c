@@ -40,13 +40,13 @@ void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
   memset(out, 0, outlen);
   memcpy(buf, in, inlen);
   char *ix = out;
-  for (uint32_t j = 0, olen = 0; j < xlen; j+=3, olen+=4) {
+  for (uint32_t j = 0, olen = 0; j < xlen; j += 3, olen += 4) {
     unsigned char obuf[4] = {0};
-    uint32_t t = (buf[j]<<16)|(buf[j+1]<<8)|(buf[j+2]);
-    obuf[0] = B64[(t&0xfc0000)>>18];
-    obuf[1] = B64[(t&0x3f000)>>12];
-    obuf[2] = B64[(t&0xfc0)>>6];
-    obuf[3] = B64[t&0x3f];
+    uint32_t t = (buf[j] << 16) | (buf[j + 1] << 8) | (buf[j + 2]);
+    obuf[0] = B64[(t & 0xfc0000) >> 18];
+    obuf[1] = B64[(t & 0x3f000) >> 12];
+    obuf[2] = B64[(t & 0xfc0) >> 6];
+    obuf[3] = B64[t & 0x3f];
     if (olen <= outlen - 4) {
       memcpy(ix, obuf, 4);
       ix += 4;
@@ -55,11 +55,11 @@ void b64encode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
   uint32_t offs = strnlen(out, outlen);
   switch (after) {
     case 1:
-      out[offs-1] = '=';
+      out[offs - 1] = '=';
       break;
     case 2:
-      out[offs-2] = '=';
-      out[offs-1] = '=';
+      out[offs - 2] = '=';
+      out[offs - 1] = '=';
       break;
   };
 }
@@ -95,10 +95,10 @@ int b64decode(const char *in, uint32_t inlen, char *out, uint32_t outlen)
       obuf[ix++] = invB64[cur];
     }
     if (ix == 4) {
-      uint32_t k = (obuf[0]<<18)|(obuf[1]<<12)|(obuf[2]<<6)|obuf[3];
+      uint32_t k = (obuf[0] << 18) | (obuf[1] << 12) | (obuf[2] << 6) | obuf[3];
       memset(obuf, 0, 5);
       ix = 0;
-      unsigned char tmp[3] = {(k&0xff0000)>>16, (k&0xff00)>>8, k&0xff};
+      unsigned char tmp[3] = {(k & 0xff0000) >> 16, (k & 0xff00) >> 8, k & 0xff};
       for (int32_t q = 0; q < 3; q++) {
         *p++ = tmp[q];
         if (++outcnt >= outlen) {
