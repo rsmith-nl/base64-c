@@ -5,7 +5,7 @@ base64 encoding/decoding for C
 :tags: C programming, base64, public domain
 :author: Roland Smith
 
-.. Last modified: 2026-02-22T02:03:00+0100
+.. Last modified: 2026-05-10T13:20:58+0200
 .. vim:spelllang=en
 
 Introduction
@@ -13,6 +13,13 @@ Introduction
 
 This code was inspired by the Python ``base64`` module.
 That is, to provide base64 encoding and decoding.
+
+
+No AI policy
+============
+
+This code is by a human and for humans.
+"AI" / LLM-generated rewrites and additions are not welcome.
 
 
 Implementation
