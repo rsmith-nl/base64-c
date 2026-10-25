@@ -5,7 +5,7 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:25:21 +0100
-// Last modified: 2026-04-07T23:10:28+0200
+// Last modified: 2026-10-25T21:05:31+0100
 
 #define BASE64_IMPLEMENTATION
 #include "single_header/base64.h"
@@ -23,7 +23,7 @@
 #define RESET "\033[0m"  // No Color
 
 // Test for b64encode and b64decode.
-int main(void)
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[])
 {
   const char *in[7] =  {
     "This is a test",
