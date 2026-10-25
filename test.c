@@ -5,10 +5,9 @@
 // Author: R.F. Smith <rsmith@xs4all.nl>
 // SPDX-License-Identifier: Unlicense
 // Created: 2025-01-18 20:25:21 +0100
-// Last modified: 2026-10-25T21:05:31+0100
+// Last modified: 2026-10-25T21:08:01+0100
 
-#define BASE64_IMPLEMENTATION
-#include "single_header/base64.h"
+#include "base64.c"
 #include <stdio.h>
 #include <string.h>
 
@@ -21,6 +20,10 @@
 #define YELLOW "\033[0;33m"
 #define BOLD_YELLOW "\033[1;33m"
 #define RESET "\033[0m"  // No Color
+
+#ifndef VERSION
+#define VERSION "UNKNOWN"
+#endif
 
 // Test for b64encode and b64decode.
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[])
@@ -44,6 +47,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[])
     "QWJhY 2FkYWJyYQ==",
   };
   int failcount = 0;
+  puts(BOLD_RED"Built from test.c and base64.c, version "VERSION""RESET);
   puts(PURPLE"Start tests"RESET);
   puts(CYAN"Running tests for b64encode"RESET);
   for (int32_t j = 0; j < 6; j++) {

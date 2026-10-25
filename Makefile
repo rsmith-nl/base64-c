@@ -1,12 +1,14 @@
 # vim:fileencoding=utf-8:ft=make
-# Use as many jobs as the computer has cores.
-.MAKEFLAGS: -j C
 
-CFLAGS = -pipe -std=c11 -g3 -Wall -Wextra -Wstrict-prototypes -Wpedantic \
+CFLAGS = -pipe -std=c11 -g -Wall -Wextra -Wstrict-prototypes -Wpedantic \
                 -Wshadow -Wmissing-field-initializers -Wpointer-arith
 
-test: test.c single_header/base64.h  ## Compile test program (default)
-	$(CC) $(CFLAGS) -o test test.c
+GIT_VERSION != git describe --dirty --always --tags
+
+all: test single_header/base64.h
+
+test: test.c base64.h base64.c ## Compile test program (default)
+	$(CC) $(CFLAGS) -DVERSION="\"${GIT_VERSION}\"" -o test test.c
 
 single_header/base64.h: base64.c base64.h  ## Build single header library (POSIX only).
 	cp base64.h single_header/base64.h
@@ -26,7 +28,7 @@ tidy:  ## Run static code checker clang-tidy.
 
 .PHONY: clean
 clean:  ## Remove generated files
-	rm -f *.o test test.exe single_header/base64.h
+	rm -f *.o test test.exe
 
 .PHONY: help
 help:  ## List available commands
